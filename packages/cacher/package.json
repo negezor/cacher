@@ -1,0 +1,37 @@
+{
+	"name": "@cacher/cacher",
+	"version": "1.0.0",
+	"description": "Modern implementation of key-value storage",
+	"license": "MIT",
+	"author": {
+		"name": "Vladlen (Negezor)",
+		"email": "negezor@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/negezor/cacher.git",
+		"directory": "packages/cacher"
+	},
+	"homepage": "https://github.com/negezor/cacher#readme",
+	"bugs": "https://github.com/negezor/cacher/issues",
+	"keywords": [
+		"cache"
+	],
+	"files": [
+		"lib"
+	],
+	"main": "lib/index.js",
+	"types": "./lib/index.d.ts",
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"peerDependencies": {
+
+	},
+	"dependencies": {
+
+	},
+	"devDependencies": {
+
+	}
+}
