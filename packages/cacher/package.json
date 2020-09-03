@@ -1,6 +1,6 @@
 {
 	"name": "@cacher/cacher",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "Modern implementation of key-value storage",
 	"license": "MIT",
 	"author": {
@@ -25,13 +25,7 @@
 	"engines": {
 		"node": ">=14.0.0"
 	},
-	"peerDependencies": {
-
-	},
-	"dependencies": {
-
-	},
-	"devDependencies": {
-
-	}
+	"peerDependencies": {},
+	"dependencies": {},
+	"devDependencies": {}
 }
