@@ -49,7 +49,7 @@ export class Cacher<V = any> {
 
 		return Object.fromEntries(
 			rawValues.map((rawValue, i) => {
-				const key = keys[i].alias ?? keys[i].key;
+				const key = keys[i].alias || keys[i].key;
 
 				const value = rawValue !== undefined
 					? this.deserializer(rawValue)

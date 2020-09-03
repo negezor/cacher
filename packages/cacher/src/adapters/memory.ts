@@ -20,7 +20,7 @@ export class MemoryAdapter implements IAdapter {
 
 	public async get(keys: string[]): Promise<(string | undefined)[]> {
 		return keys.map(key => (
-			this.storage.get(key) ?? undefined
+			this.storage.get(key) || undefined
 		));
 	}
 
