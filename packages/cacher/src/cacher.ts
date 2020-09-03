@@ -80,7 +80,7 @@ export class Cacher<V = any> {
 		)));
 	}
 
-	public async touch(rawKeys: ICacherTouchOptions[]): Promise<void> {
+	public async touch(rawKeys: AllowArray<ICacherTouchOptions>): Promise<void> {
 		const keys = arraify(rawKeys);
 
 		return this.adapter.touch(keys.map(item => ({
