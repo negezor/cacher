@@ -3,26 +3,26 @@ import { IAdapter, IAdapterSetOptions, IAdapterTouchOptions } from './adapter';
 export interface IUnionAdapterOptions {
 	adapters: [IAdapter, IAdapter];
 
-	repliceTtl?: number;
+	replicaTtl?: number;
 	replicaMode?: boolean;
 }
 
 export class UnionAdapter implements IAdapter {
 	protected readonly adapters: IUnionAdapterOptions['adapters'];
 
-	protected readonly repliceTtl?: number;
+	protected readonly replicaTtl?: number;
 
 	protected readonly replicaMode: boolean;
 
 	public constructor({
 		adapters,
 
-		repliceTtl,
+		replicaTtl,
 		replicaMode = true
 	}: IUnionAdapterOptions) {
 		this.adapters = adapters;
 
-		this.repliceTtl = repliceTtl;
+		this.replicaTtl = replicaTtl;
 		this.replicaMode = replicaMode;
 	}
 
@@ -55,7 +55,7 @@ export class UnionAdapter implements IAdapter {
 					key,
 					value,
 
-					ttl: this.repliceTtl
+					ttl: this.replicaTtl
 				});
 			});
 
