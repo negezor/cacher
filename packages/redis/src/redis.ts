@@ -100,11 +100,14 @@ export class RedisAdapter implements IAdapter {
 
 		const pipeline = this.redis.multi();
 
-		for (const { key, ttl } of keys) {
-			await this.redis.pexpire(key, ttl);
-		}
+		const promise = Promise.all(keys.map(({ key, ttl }) => (
+			this.redis.pexpire(key, ttl)
+		)));
 
-		await pipeline.exec();
+		await Promise.all([
+			pipeline.exec(),
+			promise
+		]);
 	}
 
 	public async clear(namespace: string): Promise<void> {
