@@ -64,7 +64,7 @@ export class UnionAdapter implements IAdapter {
 			}
 		}
 
-		let index = 0;
+		let index = -1;
 
 		// eslint-disable-next-line no-return-assign
 		return firstItems.map(item => (
