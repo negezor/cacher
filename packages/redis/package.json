@@ -30,7 +30,7 @@
 		"@cacher/cacher": "*"
 	},
 	"dependencies": {
-		"ioredis": "^4.19.2"
+		"ioredis": "^4.24.5"
 	},
 	"devDependencies": {
 		"@types/ioredis": "^4.22.1"
