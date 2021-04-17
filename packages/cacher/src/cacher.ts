@@ -72,6 +72,18 @@ export class Cacher<V = any> {
 		})));
 	}
 
+	public async increment(rawKeys: AllowArray<string>, value: number): Promise<number[]> {
+		const keys = arraify(rawKeys);
+
+		return this.adapter.increment(keys, value);
+	}
+
+	public async decrement(rawKeys: AllowArray<string>, value: number): Promise<number[]> {
+		const keys = arraify(rawKeys);
+
+		return this.adapter.decrement(keys, value);
+	}
+
 	public async delete(rawKeys: AllowArray<string>): Promise<void> {
 		const keys = arraify(rawKeys);
 

@@ -80,6 +80,22 @@ export class UnionAdapter implements IAdapter {
 		)));
 	}
 
+	public async increment(keys: string[], value: number): Promise<number[]> {
+		const [firstAdapter, secondAdapter] = this.adapters;
+
+		const firstItems = await firstAdapter.increment(keys, value);
+
+		const secondItems = await secondAdapter.increment(keys, value);
+
+		return keys.map((key, index) => (
+			firstItems[index] || secondItems[index]
+		));
+	}
+
+	public async decrement(keys: string[], value: number): Promise<number[]> {
+		return this.increment(keys, -value);
+	}
+
 	public async delete(keys: string[]): Promise<void> {
 		await Promise.all(this.adapters.map(adapter => (
 			adapter.delete(keys)

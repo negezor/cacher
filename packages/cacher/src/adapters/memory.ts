@@ -30,6 +30,20 @@ export class MemoryAdapter implements IAdapter {
 		}
 	}
 
+	public async increment(keys: string[], value: number): Promise<number[]> {
+		return keys.map((key) => {
+			const nextValue = Number(this.storage.get(key)) || 0 + value;
+
+			this.storage.set(key, String(nextValue));
+
+			return nextValue;
+		});
+	}
+
+	public async decrement(keys: string[], value: number): Promise<number[]> {
+		return this.increment(keys, -value);
+	}
+
 	public async delete(keys: string[]): Promise<void> {
 		for (const key of keys) {
 			this.storage.delete(key);

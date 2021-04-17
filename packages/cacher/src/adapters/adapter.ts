@@ -14,6 +14,10 @@ export interface IAdapter {
 
 	set(keys: IAdapterSetOptions[]): Promise<void>;
 
+	increment(keys: string[], value: number): Promise<number[]>
+
+	decrement(keys: string[], value: number): Promise<number[]>
+
 	delete(keys: string[]): Promise<void>;
 
 	touch(keys: IAdapterTouchOptions[]): Promise<void>;
