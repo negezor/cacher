@@ -13,3 +13,7 @@ app.js
 app.mjs
 
 docs/.vuepress/dist
+
+# IDE-specific
+/.idea/
+/.vscode/
