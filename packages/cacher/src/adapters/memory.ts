@@ -1,4 +1,4 @@
-import { IAdapter, IAdapterSetOptions } from './adapter';
+import { IAdapter, IAdapterIncrementOptions, IAdapterSetOptions } from './adapter';
 
 export interface IMapLike<K, V> {
 	get(key: K): V | undefined;
@@ -28,6 +28,16 @@ export class MemoryAdapter implements IAdapter {
 		for (const { key, value } of keys) {
 			this.storage.set(key, value);
 		}
+	}
+
+	public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
+		return keys.map(({ key, value }) => {
+			const nextValue = Number(this.storage.get(key) || 0) + value;
+
+			this.storage.set(key, String(nextValue));
+
+			return nextValue;
+		});
 	}
 
 	public async delete(keys: string[]): Promise<void> {

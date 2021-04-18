@@ -1,4 +1,6 @@
-import { IAdapter, IAdapterSetOptions, IAdapterTouchOptions } from './adapter';
+import {
+	IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions
+} from './adapter';
 
 export interface IUnionAdapterOptions {
 	adapters: [IAdapter, IAdapter];
@@ -78,6 +80,16 @@ export class UnionAdapter implements IAdapter {
 		await Promise.all(this.adapters.map(adapter => (
 			adapter.set(keys)
 		)));
+	}
+
+	public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
+		const [firstAdapter, secondAdapter] = this.adapters;
+
+		const firstKeys = await firstAdapter.increment(keys);
+
+		const secondKeys = await secondAdapter.increment(keys);
+
+		return keys.map((_, index) => firstKeys[index] || secondKeys[index]);
 	}
 
 	public async delete(keys: string[]): Promise<void> {
