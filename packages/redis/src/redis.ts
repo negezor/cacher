@@ -1,6 +1,8 @@
 import IORedis from 'ioredis';
 
-import { IAdapter, IAdapterSetOptions, IAdapterTouchOptions } from '@cacher/cacher';
+import {
+	IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions
+} from '@cacher/cacher';
 
 export interface IRedisAdapterConnectionOptions {
 	hostname?: string;
@@ -82,6 +84,12 @@ export class RedisAdapter implements IAdapter {
 		}
 
 		await Promise.all(promises);
+	}
+
+	public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
+		return Promise.all(keys.map(({ key, value }) => (
+			this.redis.incrbyfloat(key, value)
+		)));
 	}
 
 	public async delete(keys: string[]): Promise<void> {
