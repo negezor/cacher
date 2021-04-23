@@ -85,9 +85,10 @@ export class UnionAdapter implements IAdapter {
 	public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
 		const [firstAdapter, secondAdapter] = this.adapters;
 
-		const firstKeys = await firstAdapter.increment(keys);
-
-		const secondKeys = await secondAdapter.increment(keys);
+		const [firstKeys, secondKeys] = await Promise.all([
+			firstAdapter.increment(keys),
+			secondAdapter.increment(keys)
+		]);
 
 		return keys.map((_, index) => firstKeys[index] || secondKeys[index]);
 	}
