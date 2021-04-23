@@ -87,9 +87,26 @@ export class RedisAdapter implements IAdapter {
 	}
 
 	public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
-		return Promise.all(keys.map(({ key, value }) => (
+		if (keys.length === 1) {
+			const { key, value } = keys[0];
+
+			const result = await this.redis.incrbyfloat(key, value);
+
+			return [result];
+		}
+
+		const pipeline = this.redis.multi();
+
+		const promise = Promise.all(keys.map(({ key, value }) => (
 			this.redis.incrbyfloat(key, value)
 		)));
+
+		const { 1: result } = await Promise.all([
+			pipeline.exec(),
+			promise
+		]);
+
+		return result;
 	}
 
 	public async delete(keys: string[]): Promise<void> {
