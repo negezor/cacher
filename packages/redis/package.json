@@ -1,6 +1,6 @@
 {
 	"name": "@cacher/redis",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Implementation of the redis adapter",
 	"license": "MIT",
 	"author": {
