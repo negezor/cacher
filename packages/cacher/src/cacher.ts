@@ -3,6 +3,7 @@ import {
 	ICacherOptions,
 	ICacherGetOptions,
 	ICacherSetOptions,
+	ICacherIncrementOptions,
 	ICacherTouchOptions,
 
 	Serializer,
@@ -69,6 +70,15 @@ export class Cacher<V = any> {
 			key: this.getNamespaceKey(item.key),
 			value: this.serializer(item.value),
 			ttl: item.ttl
+		})));
+	}
+
+	public increment(rawKeys: AllowArray<ICacherIncrementOptions>): Promise<(number | undefined)[]> {
+		const keys = arraify(rawKeys);
+
+		return this.adapter.increment(keys.map(item => ({
+			key: this.getNamespaceKey(item.key),
+			value: item.value
 		})));
 	}
 

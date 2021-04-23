@@ -25,5 +25,10 @@ export interface ICacherSetOptions<V> {
 	ttl?: number;
 }
 
+export interface ICacherIncrementOptions {
+	key: string;
+	value: number;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ICacherTouchOptions extends IAdapterTouchOptions {}
