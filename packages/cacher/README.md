@@ -90,6 +90,27 @@ async function run() {
 		}
 	]);
 
+	// Increment
+	// /!\ Cacher data must be float
+
+	await cacher.increment({
+		key: '1',
+		value: 5
+	});
+
+	// Multi set
+
+	await cacher.increment([
+		{
+			key: '1',
+			value: 2
+		},
+		{
+			key: '2',
+			value: 4
+		}
+	]);
+
 	// Delete
 
 	await cacher.delete('1');
