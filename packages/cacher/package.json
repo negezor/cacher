@@ -1,6 +1,6 @@
 {
 	"name": "@cacher/cacher",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Modern implementation of key-value storage",
 	"license": "MIT",
 	"author": {
