@@ -1,5 +1,8 @@
 import {
-	IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions
+	IAdapter,
+	IAdapterIncrementOptions,
+	IAdapterSetOptions,
+	IAdapterTouchOptions
 } from './adapter';
 
 export interface IUnionAdapterOptions {

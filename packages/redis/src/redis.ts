@@ -1,7 +1,10 @@
 import IORedis from 'ioredis';
 
 import {
-	IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions
+	IAdapter,
+	IAdapterIncrementOptions,
+	IAdapterSetOptions,
+	IAdapterTouchOptions
 } from '@cacher/cacher';
 
 export interface IRedisAdapterConnectionOptions {
