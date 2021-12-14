@@ -40,6 +40,6 @@
 		"ioredis": "^4.26.0"
 	},
 	"devDependencies": {
-		"@types/ioredis": "^4.26.0"
+		"@types/ioredis": "^4.28.4"
 	}
 }
