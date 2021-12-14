@@ -28,8 +28,9 @@
 		"clean": "rm -rf ./packages/*/lib",
 		"rollup:build": "NODE_ENV=production rollup -c rollup.config.js",
 		"rollup:watch": "yarn run rollup:build -w",
-		"test": "yarn run test:jest && yarn run test:eslint",
+		"test": "yarn run test:jest && yarn run lint",
 		"test:jest": "jest --config jest.config.json --no-cache",
-		"test:eslint": "eslint --ext .ts --ignore-path .gitignore packages/*/src/**/*.ts"
+		"lint": "yarn run lint:eslint",
+		"lint:eslint": "eslint --ext .ts --ignore-path .gitignore packages/*/src/**/*.ts"
 	}
 }
