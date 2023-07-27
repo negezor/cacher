@@ -2,7 +2,7 @@ import {
     IAdapter,
     IAdapterIncrementOptions,
     IAdapterSetOptions,
-    IAdapterTouchOptions
+    IAdapterTouchOptions,
 } from './adapter';
 
 export interface IUnionAdapterOptions {
@@ -23,7 +23,7 @@ export class UnionAdapter implements IAdapter {
         adapters,
 
         replicaTtl,
-        replicaMode = true
+        replicaMode = true,
     }: IUnionAdapterOptions) {
         this.adapters = adapters;
 
@@ -38,7 +38,7 @@ export class UnionAdapter implements IAdapter {
 
         const keysForSecond = keys.filter((item, index) => (
             firstItems[index] === undefined
-        )) as string[];
+        )) ;
 
         if (keysForSecond.length === 0) {
             return firstItems;
@@ -60,7 +60,7 @@ export class UnionAdapter implements IAdapter {
                     key,
                     value,
 
-                    ttl: this.replicaTtl
+                    ttl: this.replicaTtl,
                 });
             });
 
@@ -90,7 +90,7 @@ export class UnionAdapter implements IAdapter {
 
         const [firstKeys, secondKeys] = await Promise.all([
             firstAdapter.increment(keys),
-            secondAdapter.increment(keys)
+            secondAdapter.increment(keys),
         ]);
 
         return keys.map((_, index) => firstKeys[index] || secondKeys[index]);

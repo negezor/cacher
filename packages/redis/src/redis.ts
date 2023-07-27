@@ -4,7 +4,7 @@ import {
     IAdapter,
     IAdapterIncrementOptions,
     IAdapterSetOptions,
-    IAdapterTouchOptions
+    IAdapterTouchOptions,
 } from '@cacher/cacher';
 
 export interface IRedisAdapterConnectionOptions {
@@ -18,11 +18,11 @@ export interface IRedisAdapterConnectionOptions {
 }
 
 export interface IRedisAdapterOptions {
-    connection?: IRedisAdapterConnectionOptions | IORedis.Redis | string;
+    connection?: IRedisAdapterConnectionOptions | IORedis | string;
 }
 
 export class RedisAdapter implements IAdapter {
-    protected readonly redis: IORedis.Redis;
+    protected readonly redis: IORedis;
 
     public constructor({ connection = {} }: IRedisAdapterOptions = {}) {
         if (typeof connection === 'string') {
@@ -35,7 +35,7 @@ export class RedisAdapter implements IAdapter {
                 port: connection.port,
                 username: connection.username,
                 password: connection.password,
-                db: connection.database
+                db: connection.database,
             });
         }
     }
@@ -95,7 +95,7 @@ export class RedisAdapter implements IAdapter {
 
             const result = await this.redis.incrbyfloat(key, value);
 
-            return [result];
+            return [Number(result)];
         }
 
         const pipeline = this.redis.multi();
@@ -106,10 +106,10 @@ export class RedisAdapter implements IAdapter {
 
         const { 1: result } = await Promise.all([
             pipeline.exec(),
-            promise
+            promise,
         ]);
 
-        return result;
+        return result.map(Number);
     }
 
     public async delete(keys: string[]): Promise<void> {
@@ -134,17 +134,17 @@ export class RedisAdapter implements IAdapter {
 
         await Promise.all([
             pipeline.exec(),
-            promise
+            promise,
         ]);
     }
 
     public async clear(namespace: string): Promise<void> {
         const stream = this.redis.scanStream({
-            match: `${namespace}:*`
+            match: `${namespace}:*`,
         });
 
         for await (const keys of stream) {
-            await this.redis.del(...keys);
+            await this.redis.del(...keys as string[]);
         }
     }
 }

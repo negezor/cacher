@@ -9,7 +9,7 @@ import {
     Serializer,
     Deserializer,
 
-    AllowArray
+    AllowArray,
 } from './types';
 import { arraify } from './helpers';
 
@@ -29,7 +29,7 @@ export class Cacher<V = any> {
         namespace,
 
         serializer = JSON.stringify,
-        deserializer = JSON.parse
+        deserializer = JSON.parse,
     }: ICacherOptions<V>) {
         this.adapter = adapter;
 
@@ -69,7 +69,7 @@ export class Cacher<V = any> {
         return this.adapter.set(keys.map(item => ({
             key: this.getNamespaceKey(item.key),
             value: this.serializer(item.value),
-            ttl: item.ttl
+            ttl: item.ttl,
         })));
     }
 
@@ -78,7 +78,7 @@ export class Cacher<V = any> {
 
         return this.adapter.increment(keys.map(item => ({
             key: this.getNamespaceKey(item.key),
-            value: item.value
+            value: item.value,
         })));
     }
 
@@ -95,7 +95,7 @@ export class Cacher<V = any> {
 
         return this.adapter.touch(keys.map(item => ({
             key: this.getNamespaceKey(item.key),
-            ttl: item.ttl
+            ttl: item.ttl,
         })));
     }
 
