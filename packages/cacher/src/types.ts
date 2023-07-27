@@ -6,28 +6,28 @@ export type Serializer<V> = (value: V) => string;
 export type Deserializer<V> = (value: string) => V;
 
 export interface ICacherOptions<V> {
-	adapter?: IAdapter;
+    adapter?: IAdapter;
 
-	namespace: string;
+    namespace: string;
 
-	serializer?: Serializer<V>;
-	deserializer?: Deserializer<V>;
+    serializer?: Serializer<V>;
+    deserializer?: Deserializer<V>;
 }
 
 export interface ICacherGetOptions<K, A> {
-	key: K;
-	alias?: A;
+    key: K;
+    alias?: A;
 }
 
 export interface ICacherSetOptions<V> {
-	key: string;
-	value: V;
-	ttl?: number;
+    key: string;
+    value: V;
+    ttl?: number;
 }
 
 export interface ICacherIncrementOptions {
-	key: string;
-	value: number;
+    key: string;
+    value: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

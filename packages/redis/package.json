@@ -1,45 +1,45 @@
 {
-	"name": "@cacher/redis",
-	"version": "0.1.1",
-	"description": "Implementation of the redis adapter",
-	"license": "MIT",
-	"author": {
-		"name": "Vladlen (Negezor)",
-		"email": "negezor@gmail.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/negezor/cacher.git",
-		"directory": "packages/redis"
-	},
-	"homepage": "https://github.com/negezor/cacher#readme",
-	"bugs": "https://github.com/negezor/cacher/issues",
-	"keywords": [
-		"cache",
-		"redis"
-	],
-	"files": [
-		"lib"
-	],
-	"main": "./lib/index.js",
-	"types": "./lib/index.d.ts",
-	"sideEffects": false,
-	"exports": {
-		".": {
-			"import": "./lib/index.mjs",
-			"require": "./lib/index.js"
-		}
-	},
-	"engines": {
-		"node": ">=14.0.0"
-	},
-	"peerDependencies": {
-		"@cacher/cacher": "*"
-	},
-	"dependencies": {
-		"ioredis": "^5.3.2"
-	},
-	"devDependencies": {
-		"@types/ioredis": "^4.28.10"
-	}
+    "name": "@cacher/redis",
+    "version": "0.1.1",
+    "description": "Implementation of the redis adapter",
+    "license": "MIT",
+    "author": {
+        "name": "Vladlen (Negezor)",
+        "email": "negezor@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/negezor/cacher.git",
+        "directory": "packages/redis"
+    },
+    "homepage": "https://github.com/negezor/cacher#readme",
+    "bugs": "https://github.com/negezor/cacher/issues",
+    "keywords": [
+        "cache",
+        "redis"
+    ],
+    "files": [
+        "lib"
+    ],
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "import": "./lib/index.mjs",
+            "require": "./lib/index.js"
+        }
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "peerDependencies": {
+        "@cacher/cacher": "*"
+    },
+    "dependencies": {
+        "ioredis": "^5.3.2"
+    },
+    "devDependencies": {
+        "@types/ioredis": "^4.28.10"
+    }
 }

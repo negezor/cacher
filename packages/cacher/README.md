@@ -24,124 +24,124 @@ npm i @cacher/cacher
 import { Cacher } from '@cacher/cacher';
 
 interface IMyData {
-	someData: boolean;
+    someData: boolean;
 }
 
 const cacher = new Cacher<IMyData>({
-	namespace: 'users'
+    namespace: 'users'
 });
 
 
 async function run() {
-	// Single
-	
-	const { 1: user } = await cacher.get({
-		key: '1',
-		// alias: 'user'
-	});
-	
-	// With alias
-	
-	const { user } = await cacher.get({
-		key: '1',
-		alias: 'user'
-	});
+    // Single
+    
+    const { 1: user } = await cacher.get({
+        key: '1',
+        // alias: 'user'
+    });
+    
+    // With alias
+    
+    const { user } = await cacher.get({
+        key: '1',
+        alias: 'user'
+    });
 
-	// Multi get
+    // Multi get
 
-	const result = await cacher.get([
-		{ key: '1' },
-		{ key: '2' },
-		{ key: '3' },
-		{ key: '4' }
-	]);
+    const result = await cacher.get([
+        { key: '1' },
+        { key: '2' },
+        { key: '3' },
+        { key: '4' }
+    ]);
 
-	// result[id] // => IMyData | undefined
+    // result[id] // => IMyData | undefined
 
-	// Set
+    // Set
 
-	await cacher.set({
-		key: '1',
-		value: {
-			someData: true
-		},
-		// ms
-		// ttl: 10_000
-	});
+    await cacher.set({
+        key: '1',
+        value: {
+            someData: true
+        },
+        // ms
+        // ttl: 10_000
+    });
 
-	// Multi set
+    // Multi set
 
-	await cacher.set([
-		{
-			key: '1',
-			value: {
-				someData: true
-			},
-			// ms
-			// ttl: 10_000
-		},
-		{
-			key: '2',
-			value: {
-				someData: true
-			},
-			// ms
-			// ttl: 10_000
-		}
-	]);
+    await cacher.set([
+        {
+            key: '1',
+            value: {
+                someData: true
+            },
+            // ms
+            // ttl: 10_000
+        },
+        {
+            key: '2',
+            value: {
+                someData: true
+            },
+            // ms
+            // ttl: 10_000
+        }
+    ]);
 
-	// Increment
-	// /!\ Cacher data must be float
+    // Increment
+    // /!\ Cacher data must be float
 
-	await cacher.increment({
-		key: '1',
-		value: 5
-	});
+    await cacher.increment({
+        key: '1',
+        value: 5
+    });
 
-	// Multi set
+    // Multi set
 
-	await cacher.increment([
-		{
-			key: '1',
-			value: 2
-		},
-		{
-			key: '2',
-			value: 4
-		}
-	]);
+    await cacher.increment([
+        {
+            key: '1',
+            value: 2
+        },
+        {
+            key: '2',
+            value: 4
+        }
+    ]);
 
-	// Delete
+    // Delete
 
-	await cacher.delete('1');
+    await cacher.delete('1');
 
-	// Multi delete
+    // Multi delete
 
-	await cacher.delete(['1', '2', '3']);
+    await cacher.delete(['1', '2', '3']);
 
-	// Update ttl
+    // Update ttl
 
-	await cacher.touch({
-		key: '1',
-		ttl: 60_000
-	});
+    await cacher.touch({
+        key: '1',
+        ttl: 60_000
+    });
 
-	// Multi update ttl
+    // Multi update ttl
 
-	await cacher.touch([
-		{
-			key: '1',
-			ttl: 60_000
-		},
-		{
-			key: '2',
-			ttl: 60_000
-		}
-	]);
+    await cacher.touch([
+        {
+            key: '1',
+            ttl: 60_000
+        },
+        {
+            key: '2',
+            ttl: 60_000
+        }
+    ]);
 
-	// Clear all namespace
+    // Clear all namespace
 
-	await cacher.clear();
+    await cacher.clear();
 }
 
 run().catch(console.log);
@@ -156,8 +156,8 @@ import { RedisAdapter } from '@cacher/redis';
 const adapter = new RedisAdapter();
 
 const cacher = new Cacher({
-	adapter,
+    adapter,
 
-	namespace: 'users'
+    namespace: 'users'
 });
 ```

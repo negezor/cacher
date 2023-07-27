@@ -5,67 +5,67 @@ import { builtinModules } from 'module';
 import { join as pathJoin } from 'path';
 
 const MODULES = [
-	'cacher',
-	'redis'
+    'cacher',
+    'redis'
 ];
 
 const coreModules = builtinModules.filter(name => (
-	!/(^_|\/)/.test(name)
+    !/(^_|\/)/.test(name)
 ));
 
 const cacheRoot = pathJoin(tmpdir(), '.rpt2_cache');
 
 const getModulePath = path => (
-	pathJoin(__dirname, 'packages', path)
+    pathJoin(__dirname, 'packages', path)
 );
 
 // eslint-disable-next-line import/no-default-export
 export default async () => (
-	Promise.all(
-		MODULES
-			.map(getModulePath)
-			.map(async (modulePath) => {
-				const modulePkg = await import(
-					pathJoin(modulePath, 'package.json')
-				);
+    Promise.all(
+        MODULES
+            .map(getModulePath)
+            .map(async (modulePath) => {
+                const modulePkg = await import(
+                    pathJoin(modulePath, 'package.json')
+                );
 
-				const src = pathJoin(modulePath, 'src');
-				const lib = pathJoin(modulePath, 'lib');
+                const src = pathJoin(modulePath, 'src');
+                const lib = pathJoin(modulePath, 'lib');
 
-				return {
-					input: pathJoin(src, 'index.ts'),
-					plugins: [
-						typescriptPlugin({
-							cacheRoot,
+                return {
+                    input: pathJoin(src, 'index.ts'),
+                    plugins: [
+                        typescriptPlugin({
+                            cacheRoot,
 
-							useTsconfigDeclarationDir: false,
+                            useTsconfigDeclarationDir: false,
 
-							tsconfigOverride: {
-								outDir: lib,
-								rootDir: src,
-								include: [src]
-							}
-						})
-					],
-					external: [
-						...Object.keys(modulePkg.dependencies || {}),
-						...Object.keys(modulePkg.peerDependencies || {}),
-						// TODO: To make better
-						...MODULES.map(moduleName => `@cacher/${moduleName}`),
-						...coreModules
-					],
-					output: [
-						{
-							file: pathJoin(modulePath, 'lib/index.js'),
-							format: 'cjs',
-							exports: 'named'
-						},
-						{
-							file: pathJoin(modulePath, 'lib/index.mjs'),
-							format: 'esm'
-						}
-					]
-				};
-			})
-	)
+                            tsconfigOverride: {
+                                outDir: lib,
+                                rootDir: src,
+                                include: [src]
+                            }
+                        })
+                    ],
+                    external: [
+                        ...Object.keys(modulePkg.dependencies || {}),
+                        ...Object.keys(modulePkg.peerDependencies || {}),
+                        // TODO: To make better
+                        ...MODULES.map(moduleName => `@cacher/${moduleName}`),
+                        ...coreModules
+                    ],
+                    output: [
+                        {
+                            file: pathJoin(modulePath, 'lib/index.js'),
+                            format: 'cjs',
+                            exports: 'named'
+                        },
+                        {
+                            file: pathJoin(modulePath, 'lib/index.mjs'),
+                            format: 'esm'
+                        }
+                    ]
+                };
+            })
+    )
 );

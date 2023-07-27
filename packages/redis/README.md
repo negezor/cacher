@@ -27,28 +27,28 @@ import { RedisAdapter } from '@cacher/redis';
 const adapter = new RedisAdapter();
 
 // const adapter = new RedisAdapter({
-// 	connection: ioredisClient	
+//     connection: ioredisClient    
 // });
 
 // const adapter = new RedisAdapter({
-// 	connection: 'redis://:authpassword@127.0.0.1:6380/4'
+//     connection: 'redis://:authpassword@127.0.0.1:6380/4'
 // });
 
 // const adapter = new RedisAdapter({
-// 	connection: {
-// 		hostname: 'localhost',
-// 		port: 6379,
+//     connection: {
+//         hostname: 'localhost',
+//         port: 6379,
 
-// 		username: '...',
-// 		password: '...',
+//         username: '...',
+//         password: '...',
 
-// 		database: 1
-// 	}
+//         database: 1
+//     }
 // });
 
 const cacher = new Cacher({
-	adapter,
+    adapter,
 
-	namespace: 'users'
+    namespace: 'users'
 });
 ```

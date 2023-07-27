@@ -1,35 +1,35 @@
 {
-	"name": "cacher-monorepo",
-	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
-	"engines": {
-		"node": ">=14.0.0"
-	},
-	"devDependencies": {
-		"@types/jest": "^29.5.3",
-		"@types/node": "^20.4.5",
-		"@typescript-eslint/eslint-plugin": "^6.2.0",
-		"@typescript-eslint/parser": "^6.2.0",
-		"eslint": "^8.45.0",
-		"eslint-plugin-import": "^2.27.5",
-		"jest": "^29.6.2",
-		"rollup": "^3.26.3",
-		"rollup-plugin-typescript2": "^0.35.0",
-		"ts-jest": "^29.1.1",
-		"typescript": "^5.1.6"
-	},
-	"scripts": {
-		"prepare": "yarn run rollup:build && yarn run test",
-		"build": "yarn run rollup:build",
-		"watch": "yarn run rollup:watch",
-		"clean": "rm -rf ./packages/*/lib",
-		"rollup:build": "NODE_ENV=production rollup -c rollup.config.js",
-		"rollup:watch": "yarn run rollup:build -w",
-		"test": "yarn run test:jest && yarn run lint",
-		"test:jest": "jest --config jest.config.json --no-cache",
-		"lint": "yarn run lint:eslint",
-		"lint:eslint": "eslint --ext .ts --ignore-path .gitignore packages/*/src/**/*.ts"
-	}
+    "name": "cacher-monorepo",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.3",
+        "@types/node": "^20.4.5",
+        "@typescript-eslint/eslint-plugin": "^6.2.0",
+        "@typescript-eslint/parser": "^6.2.0",
+        "eslint": "^8.45.0",
+        "eslint-plugin-import": "^2.27.5",
+        "jest": "^29.6.2",
+        "rollup": "^3.26.3",
+        "rollup-plugin-typescript2": "^0.35.0",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.1.6"
+    },
+    "scripts": {
+        "prepare": "yarn run rollup:build && yarn run test",
+        "build": "yarn run rollup:build",
+        "watch": "yarn run rollup:watch",
+        "clean": "rm -rf ./packages/*/lib",
+        "rollup:build": "NODE_ENV=production rollup -c rollup.config.js",
+        "rollup:watch": "yarn run rollup:build -w",
+        "test": "yarn run test:jest && yarn run lint",
+        "test:jest": "jest --config jest.config.json --no-cache",
+        "lint": "yarn run lint:eslint",
+        "lint:eslint": "eslint --ext .ts --ignore-path .gitignore packages/*/src/**/*.ts"
+    }
 }
