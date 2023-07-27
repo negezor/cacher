@@ -18,42 +18,49 @@ export class MemoryAdapter implements IAdapter {
         this.storage = storage;
     }
 
-    public async get(keys: string[]): Promise<(string | undefined)[]> {
-        return keys.map(key => (
+    public get(keys: string[]): Promise<(string | undefined)[]> {
+        return Promise.resolve(keys.map(key => (
             this.storage.get(key) || undefined
-        ));
+        )));
     }
 
-    public async set(keys: IAdapterSetOptions[]): Promise<void> {
+    public set(keys: IAdapterSetOptions[]): Promise<void> {
         for (const { key, value } of keys) {
             this.storage.set(key, value);
         }
+
+        return Promise.resolve();
     }
 
-    public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
-        return keys.map(({ key, value }) => {
+    public increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
+        return Promise.resolve(keys.map(({ key, value }) => {
             const nextValue = Number(this.storage.get(key) || 0) + value;
 
             this.storage.set(key, String(nextValue));
 
             return nextValue;
-        });
+        }));
     }
 
-    public async delete(keys: string[]): Promise<void> {
+    public delete(keys: string[]): Promise<void> {
         for (const key of keys) {
             this.storage.delete(key);
         }
+
+        return Promise.resolve();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function, class-methods-use-this
-    public async touch(): Promise<void> {}
+    public async touch(): Promise<void> {
+        return Promise.resolve();
+    }
 
-    public async clear(namespace: string): Promise<void> {
+    public clear(namespace: string): Promise<void> {
         for (const key of this.storage.keys()) {
             if (key.startsWith(namespace)) {
                 this.storage.delete(key);
             }
         }
+
+        return Promise.resolve();
     }
 }
