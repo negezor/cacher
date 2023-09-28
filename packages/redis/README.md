@@ -8,15 +8,16 @@ Implementation of the redis adapter
 # Installation
 > **[Node.js](https://nodejs.org/) 14.0.0 or newer is required**  
 
+### NPM
+```
+npm i @cacher/redis
+```
+
 ### Yarn
 ```
 yarn add @cacher/redis
 ```
 
-### NPM
-```
-npm i @cacher/redis
-```
 
 ## Example usage
 
