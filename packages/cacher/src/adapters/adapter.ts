@@ -10,8 +10,8 @@ export interface IAdapterTouchOptions {
 }
 
 export interface IAdapterIncrementOptions {
-    key: string
-    value: number
+    key: string;
+    value: number;
 }
 
 export interface IAdapter {

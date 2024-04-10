@@ -1,9 +1,4 @@
-import type {
-    IAdapter,
-    IAdapterIncrementOptions,
-    IAdapterSetOptions,
-    IAdapterTouchOptions,
-} from './adapter';
+import type { IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions } from './adapter';
 
 export interface IUnionAdapterOptions {
     adapters: [IAdapter, IAdapter];
@@ -36,9 +31,7 @@ export class UnionAdapter implements IAdapter {
 
         const firstItems = await firstAdapter.get(keys);
 
-        const keysForSecond = keys.filter((item, index) => (
-            firstItems[index] === undefined
-        )) ;
+        const keysForSecond = keys.filter((item, index) => firstItems[index] === undefined);
 
         if (keysForSecond.length === 0) {
             return firstItems;
@@ -71,18 +64,16 @@ export class UnionAdapter implements IAdapter {
 
         let index = -1;
 
-        return firstItems.map(item => (
+        return firstItems.map(item =>
             item !== undefined
                 ? item
-                // biome-ignore lint/suspicious/noAssignInExpressions: this is simple
-                : secondResult[index += 1]
-        ));
+                : // biome-ignore lint/suspicious/noAssignInExpressions: this is simple
+                  secondResult[(index += 1)],
+        );
     }
 
     public async set(keys: IAdapterSetOptions[]): Promise<void> {
-        await Promise.all(this.adapters.map(adapter => (
-            adapter.set(keys)
-        )));
+        await Promise.all(this.adapters.map(adapter => adapter.set(keys)));
     }
 
     public async increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
@@ -97,20 +88,14 @@ export class UnionAdapter implements IAdapter {
     }
 
     public async delete(keys: string[]): Promise<void> {
-        await Promise.all(this.adapters.map(adapter => (
-            adapter.delete(keys)
-        )));
+        await Promise.all(this.adapters.map(adapter => adapter.delete(keys)));
     }
 
     public async touch(keys: IAdapterTouchOptions[]): Promise<void> {
-        await Promise.all(this.adapters.map(adapter => (
-            adapter.touch(keys)
-        )));
+        await Promise.all(this.adapters.map(adapter => adapter.touch(keys)));
     }
 
     public async clear(namespace: string): Promise<void> {
-        await Promise.all(this.adapters.map(adapter => (
-            adapter.clear(namespace)
-        )));
+        await Promise.all(this.adapters.map(adapter => adapter.clear(namespace)));
     }
 }

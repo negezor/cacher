@@ -1,11 +1,6 @@
 import IORedis from 'ioredis';
 
-import type {
-    IAdapter,
-    IAdapterIncrementOptions,
-    IAdapterSetOptions,
-    IAdapterTouchOptions,
-} from '@cacher/cacher';
+import type { IAdapter, IAdapterIncrementOptions, IAdapterSetOptions, IAdapterTouchOptions } from '@cacher/cacher';
 
 export interface IRedisAdapterConnectionOptions {
     hostname?: string;
@@ -43,11 +38,7 @@ export class RedisAdapter implements IAdapter {
     public async get(keys: string[]): Promise<(string | undefined)[]> {
         const values = await this.redis.mget(keys);
 
-        return values.map(value => (
-            value !== null
-                ? value
-                : undefined
-        ));
+        return values.map(value => (value !== null ? value : undefined));
     }
 
     public async set(keys: IAdapterSetOptions[]): Promise<void> {
@@ -67,15 +58,11 @@ export class RedisAdapter implements IAdapter {
         const promises: Promise<unknown>[] = [];
 
         if (mset.length !== 0) {
-            promises.push(
-                this.redis.mset(...mset)
-            );
+            promises.push(this.redis.mset(...mset));
         }
 
         if (ttlMset.length === 1) {
-            promises.push(
-                this.redis.set(...ttlMset[0])
-            );
+            promises.push(this.redis.set(...ttlMset[0]));
         } else if (ttlMset.length !== 0) {
             const pipeline = this.redis.multi();
 
@@ -100,14 +87,9 @@ export class RedisAdapter implements IAdapter {
 
         const pipeline = this.redis.multi();
 
-        const promise = Promise.all(keys.map(({ key, value }) => (
-            this.redis.incrbyfloat(key, value)
-        )));
+        const promise = Promise.all(keys.map(({ key, value }) => this.redis.incrbyfloat(key, value)));
 
-        const { 1: result } = await Promise.all([
-            pipeline.exec(),
-            promise,
-        ]);
+        const { 1: result } = await Promise.all([pipeline.exec(), promise]);
 
         return result.map(Number);
     }
@@ -127,14 +109,9 @@ export class RedisAdapter implements IAdapter {
 
         const pipeline = this.redis.multi();
 
-        const promise = Promise.all(keys.map(({ key, ttl }) => (
-            this.redis.pexpire(key, ttl)
-        )));
+        const promise = Promise.all(keys.map(({ key, ttl }) => this.redis.pexpire(key, ttl)));
 
-        await Promise.all([
-            pipeline.exec(),
-            promise,
-        ]);
+        await Promise.all([pipeline.exec(), promise]);
     }
 
     public async clear(namespace: string): Promise<void> {
@@ -143,7 +120,7 @@ export class RedisAdapter implements IAdapter {
         });
 
         for await (const keys of stream) {
-            await this.redis.del(...keys as string[]);
+            await this.redis.del(...(keys as string[]));
         }
     }
 }

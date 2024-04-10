@@ -19,9 +19,7 @@ export class MemoryAdapter implements IAdapter {
     }
 
     public get(keys: string[]): Promise<(string | undefined)[]> {
-        return Promise.resolve(keys.map(key => (
-            this.storage.get(key) || undefined
-        )));
+        return Promise.resolve(keys.map(key => this.storage.get(key) || undefined));
     }
 
     public set(keys: IAdapterSetOptions[]): Promise<void> {
@@ -33,13 +31,15 @@ export class MemoryAdapter implements IAdapter {
     }
 
     public increment(keys: IAdapterIncrementOptions[]): Promise<(number | undefined)[]> {
-        return Promise.resolve(keys.map(({ key, value }) => {
-            const nextValue = Number(this.storage.get(key) || 0) + value;
+        return Promise.resolve(
+            keys.map(({ key, value }) => {
+                const nextValue = Number(this.storage.get(key) || 0) + value;
 
-            this.storage.set(key, String(nextValue));
+                this.storage.set(key, String(nextValue));
 
-            return nextValue;
-        }));
+                return nextValue;
+            }),
+        );
     }
 
     public delete(keys: string[]): Promise<void> {
