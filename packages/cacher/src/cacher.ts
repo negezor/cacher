@@ -13,7 +13,6 @@ import {
 } from './types';
 import { arraify } from './helpers';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class Cacher<V = any> {
     protected adapter: IAdapter;
 

@@ -23,7 +23,6 @@ const getModulePath = path => (
     pathJoin(rootDir, 'packages', path)
 );
 
-// eslint-disable-next-line import/no-default-export
 export default async () => (
     Promise.all(
         MODULES
@@ -35,7 +34,6 @@ export default async () => (
                  *  peerDependencies?: Record<string, string>,
                  * }}
                 */
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const modulePkg = await import(
                     pathJoin(modulePath, 'package.json'),
                     {

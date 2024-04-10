@@ -116,7 +116,6 @@ export class RedisAdapter implements IAdapter {
         await this.redis.del(...keys);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function, class-methods-use-this
     public async touch(keys: IAdapterTouchOptions[]): Promise<void> {
         if (keys.length === 1) {
             const { key, ttl } = keys[0];
