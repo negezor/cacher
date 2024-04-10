@@ -1,6 +1,6 @@
 import IORedis from 'ioredis';
 
-import {
+import type {
     IAdapter,
     IAdapterIncrementOptions,
     IAdapterSetOptions,

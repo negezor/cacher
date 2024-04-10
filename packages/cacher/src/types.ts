@@ -1,4 +1,4 @@
-import { IAdapter, IAdapterTouchOptions } from './adapters';
+import type { IAdapter, IAdapterTouchOptions } from './adapters';
 
 export type AllowArray<T> = T | T[];
 

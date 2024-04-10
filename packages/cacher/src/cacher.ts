@@ -1,5 +1,5 @@
-import { IAdapter, MemoryAdapter } from './adapters';
-import {
+import { type IAdapter, MemoryAdapter } from './adapters';
+import type {
     ICacherOptions,
     ICacherGetOptions,
     ICacherSetOptions,
@@ -13,6 +13,7 @@ import {
 } from './types';
 import { arraify } from './helpers';
 
+// biome-ignore lint/suspicious/noExplicitAny: by default any is simple for usage
 export class Cacher<V = any> {
     protected adapter: IAdapter;
 

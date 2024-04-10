@@ -1,4 +1,4 @@
-import { IAdapter, IAdapterIncrementOptions, IAdapterSetOptions } from './adapter';
+import type { IAdapter, IAdapterIncrementOptions, IAdapterSetOptions } from './adapter';
 
 export interface IMapLike<K, V> {
     get(key: K): V | undefined;

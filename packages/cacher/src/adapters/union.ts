@@ -1,4 +1,4 @@
-import {
+import type {
     IAdapter,
     IAdapterIncrementOptions,
     IAdapterSetOptions,
@@ -74,6 +74,7 @@ export class UnionAdapter implements IAdapter {
         return firstItems.map(item => (
             item !== undefined
                 ? item
+                // biome-ignore lint/suspicious/noAssignInExpressions: this is simple
                 : secondResult[index += 1]
         ));
     }
